@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Users\CreateRequest;
+use App\Http\Requests\Users\StoreRequest;
 use App\User;
 
 class UserController extends Controller
@@ -14,7 +14,7 @@ class UserController extends Controller
         $this->user = $user;
     }
 
-    public function store(CreateRequest $request)
+    public function store(StoreRequest $request)
     {
         $user = $this->user->create($request->all());
 

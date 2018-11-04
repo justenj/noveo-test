@@ -13,4 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('users', ['as' => 'users', 'uses' => 'UserController@store']);
+Route::post('users', ['as' => 'users.store', 'uses' => 'UserController@store']);
+Route::post('groups', ['as' => 'groups.store', 'uses' => 'GroupController@store']);

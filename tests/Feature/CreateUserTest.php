@@ -7,10 +7,12 @@ use App\User;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\ValidatesRequest;
 
 class CreateUserTest extends TestCase
 {
     use RefreshDatabase;
+    use ValidatesRequest;
 
     /** @test */
     public function createUserDefaultState()
@@ -142,15 +144,6 @@ class CreateUserTest extends TestCase
 
         $response->assertStatus(201);
         $response->assertJson($expectedContent);
-    }
-
-    private function assertValidationErrors($response, $rule, $fields = [])
-    {
-        $response->assertStatus(422);
-
-        foreach ($fields as $field) {
-            $this->assertArraySubset([$field => [__('validation.' . $rule, ['attribute' => str_replace('_', ' ', $field)])]], (array)$response->getData()->errors);
-        }
     }
 
     private function getUserData($state = null)
