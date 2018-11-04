@@ -14,6 +14,14 @@ class GroupController extends Controller
         $this->group = $group;
     }
 
+    public function index()
+    {
+        $responseData = [
+            'result' => $this->group->paginate()
+        ];
+        return response($responseData);
+    }
+
     public function store(StoreRequest $request)
     {
         $group = $this->group->create($request->all());

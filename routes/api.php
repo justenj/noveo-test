@@ -14,4 +14,8 @@ use Illuminate\Http\Request;
 */
 
 Route::post('users', ['as' => 'users.store', 'uses' => 'UserController@store']);
-Route::post('groups', ['as' => 'groups.store', 'uses' => 'GroupController@store']);
+
+Route::name('groups.')->prefix('groups')->group(function() {
+    Route::get('/', 'GroupController@index')->name('index');
+    Route::post('/', 'GroupController@store')->name('store');
+});
