@@ -13,11 +13,8 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Group::class, function (Faker $faker) {
     return [
-        'email' => $faker->unique()->safeEmail,
-        'last_name' => $faker->lastName,
-        'first_name' => $faker->lastName,
-        'state' => \App\User::NON_ACTIVE_STATE
+        'name' => $faker->unique()->name(),
     ];
 });
