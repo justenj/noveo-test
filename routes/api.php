@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::name('users.')->prefix('users')->group(function() {
     Route::get('/', 'UserController@index')->name('index');
     Route::post('/', 'UserController@store')->name('store');
+    Route::get('{user}', 'UserController@show')->name('show');
     Route::put('{user}', 'UserController@update')->name('update');
 });
 

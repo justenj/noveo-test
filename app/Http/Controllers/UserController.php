@@ -29,6 +29,19 @@ class UserController extends Controller
     }
 
     /**
+     * Fetch user model
+     * @param User $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function show(User $user)
+    {
+        $responseData = [
+            'result' => $user->loadMissing(['groups'])
+        ];
+        return response($responseData);
+    }
+
+    /**
      * Create a new user
      *
      * @param StoreRequest $request
@@ -41,7 +54,7 @@ class UserController extends Controller
         $user->groups()->sync($request->groups);
 
         $responseData = [
-            'result' => $user->fresh(['groups'])->toArray()
+            'result' => $user->fresh(['groups'])
         ];
 
         return response($responseData, 201);
@@ -61,7 +74,7 @@ class UserController extends Controller
         $user->groups()->sync($request->groups);
 
         $responseData = [
-            'result' => $user->fresh('groups')->toArray()
+            'result' => $user->fresh('groups')
         ];
 
         return response($responseData, 200);

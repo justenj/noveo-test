@@ -39,7 +39,7 @@ class GroupController extends Controller
         $group = $this->group->create($request->all());
 
         $responseData = [
-            'result' => $group->toArray()
+            'result' => $group
         ];
 
         return response($responseData, 201);
@@ -57,7 +57,7 @@ class GroupController extends Controller
         $group->update($request->all());
 
         $responseData = [
-            'result' => $group->toArray()
+            'result' => $group
         ];
 
         return response($responseData, 200);
