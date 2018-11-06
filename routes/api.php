@@ -18,4 +18,5 @@ Route::post('users', ['as' => 'users.store', 'uses' => 'UserController@store']);
 Route::name('groups.')->prefix('groups')->group(function() {
     Route::get('/', 'GroupController@index')->name('index');
     Route::post('/', 'GroupController@store')->name('store');
+    Route::put('{group}', 'GroupController@update')->name('update');
 });

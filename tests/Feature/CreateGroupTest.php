@@ -17,8 +17,6 @@ class CreateGroupTest extends TestCase
     /** @test */
     public function createGroup()
     {
-        $this->withoutExceptionHandling();
-
         $name = 'Moderators';
         $expectedContent = [
             'result' => [

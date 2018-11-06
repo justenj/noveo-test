@@ -14,6 +14,12 @@ class UserController extends Controller
         $this->user = $user;
     }
 
+    /**
+     * Create a new user
+     *
+     * @param StoreRequest $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
     public function store(StoreRequest $request)
     {
         $user = $this->user->create($request->all());
