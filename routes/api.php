@@ -18,6 +18,7 @@ Route::name('users.')->prefix('users')->group(function() {
     Route::post('/', 'UserController@store')->name('store');
     Route::get('{user}', 'UserController@show')->name('show');
     Route::put('{user}', 'UserController@update')->name('update');
+    Route::post('check', 'UserController@check')->name('check');
 });
 
 Route::name('groups.')->prefix('groups')->group(function() {
