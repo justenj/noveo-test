@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Group;
 use App\Http\Requests\Groups\StoreRequest;
 use App\Http\Requests\Groups\UpdateRequest;
+use App\User;
 
 class GroupController extends Controller
 {
@@ -61,5 +62,19 @@ class GroupController extends Controller
         ];
 
         return response($responseData, 200);
+    }
+
+    /**
+     * Add user into group
+     *
+     * @param Group $group
+     * @param User $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function addUser(Group $group, User $user)
+    {
+        $group->users()->save($user);
+
+        return response([], 204);
     }
 }

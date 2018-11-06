@@ -25,7 +25,7 @@ class UserTest extends TestCase
         }
 
         $userGroups = $user->groups()->get();
-        $this->assertEquals($userGroups->pluck('id'), $userGroups->pluck('id'));
+        $this->assertEquals($userGroups->pluck('id'), $includedGroups->pluck('id'));
     }
 
     /** @test */

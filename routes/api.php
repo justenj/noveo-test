@@ -24,4 +24,5 @@ Route::name('groups.')->prefix('groups')->group(function() {
     Route::get('/', 'GroupController@index')->name('index');
     Route::post('/', 'GroupController@store')->name('store');
     Route::put('{group}', 'GroupController@update')->name('update');
+    Route::put('{group}/users/{user}', 'GroupController@addUser')->name('add_user');
 });
