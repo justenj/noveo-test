@@ -15,6 +15,19 @@ class UserController extends Controller
     }
 
     /**
+     * Fetch users collection
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $responseData = [
+            'result' => $this->user->paginate()
+        ];
+        return response($responseData);
+    }
+
+    /**
      * Create a new user
      *
      * @param StoreRequest $request

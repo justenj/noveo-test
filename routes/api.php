@@ -13,7 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('users', ['as' => 'users.store', 'uses' => 'UserController@store']);
+Route::name('users.')->prefix('users')->group(function() {
+    Route::get('/', 'UserController@index')->name('index');
+    Route::post('/', 'UserController@store')->name('store');
+});
 
 Route::name('groups.')->prefix('groups')->group(function() {
     Route::get('/', 'GroupController@index')->name('index');

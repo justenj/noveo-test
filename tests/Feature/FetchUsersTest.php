@@ -2,17 +2,17 @@
 
 namespace Tests\Feature;
 
-use App\Group;
+use App\User;
 use Tests\PaginationTesting;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class FetchGroupTest extends TestCase
+class FetchUsersTest extends TestCase
 {
     use RefreshDatabase;
     use PaginationTesting;
 
-    private $modelClass = Group::class;
-    private $urlPath = 'groups';
+    private $modelClass = User::class;
+    private $urlPath = 'users';
 
 }
