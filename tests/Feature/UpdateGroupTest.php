@@ -57,6 +57,27 @@ class UpdateGroupTest extends TestCase
     }
 
     /** @test */
+    public function updateGroupDifferentIdValue()
+    {
+        $group = factory(Group::class)->create();
+
+        $requestData = $group->toArray();
+        $requestData['id'] = 2;
+        $response = $this->json('PUT', "groups/{$group->id}", $requestData);
+
+        $response->assertStatus(200);
+
+        $expectedContent = [
+            'result' => [
+                'id' => 1,
+                'name' => $group->name
+            ]
+        ];
+
+        $response->assertJson($expectedContent);
+    }
+
+    /** @test */
     public function updateUnknownGroup()
     {
         $response = $this->json('PUT', "groups/1" , ['name' => 'Moderators']);
