@@ -7,47 +7,47 @@ use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AddUserIntoGroupTest extends TestCase
+class RemoveUserFromGroupTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function addUserIntoGroup()
-    {
-        $group = factory(Group::class)->create();
-        $user = factory(User::class)->create();
-
-        $response = $this->json('PUT', "groups/{$group->id}/users/{$user->id}");
-        $response->assertStatus(204);
-    }
-
-    /** @test */
-    public function addUserIntoGroupWhereHeAlreadyExists()
+    public function removeUserFromGroup()
     {
         $group = factory(Group::class)->create();
         $user = factory(User::class)->create();
 
         $group->users()->save($user);
 
-        $response = $this->json('PUT', "groups/{$group->id}/users/{$user->id}");
+        $response = $this->json('DELETE', "groups/{$group->id}/users/{$user->id}");
         $response->assertStatus(204);
     }
 
     /** @test */
-    public function addUserIntoUndefinedGroup()
+    public function removeUserFromGroupWithoutUsers()
+    {
+        $group = factory(Group::class)->create();
+        $user = factory(User::class)->create();
+
+        $response = $this->json('DELETE', "groups/{$group->id}/users/{$user->id}");
+        $response->assertStatus(204);
+    }
+
+    /** @test */
+    public function removeUserFromUndefinedGroup()
     {
         $user = factory(User::class)->create();
 
-        $response = $this->json('PUT', "groups/1/users/{$user->id}");
+        $response = $this->json('DELETE', "groups/1/users/{$user->id}");
         $response->assertStatus(404);
     }
 
     /** @test */
-    public function addUndefinedUserIntoGroup()
+    public function removeUndefinedUserFromGroup()
     {
         $group = factory(Group::class)->create();
 
-        $response = $this->json('PUT', "groups/{$group->id}/users/1");
+        $response = $this->json('DELETE', "groups/{$group->id}/users/1");
         $response->assertStatus(404);
     }
 }

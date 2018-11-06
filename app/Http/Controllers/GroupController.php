@@ -77,4 +77,18 @@ class GroupController extends Controller
 
         return response([], 204);
     }
+
+    /**
+     * Remove user from group
+     *
+     * @param Group $group
+     * @param User $user
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function removeUser(Group $group, User $user)
+    {
+        $group->users()->delete($user);
+
+        return response([], 204);
+    }
 }
