@@ -6,6 +6,7 @@ use App\Http\Requests\Users\CheckRequest;
 use App\Http\Requests\Users\UpdateRequest;
 use App\Http\Requests\Users\StoreRequest;
 use App\User;
+use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
@@ -19,9 +20,9 @@ class UserController extends Controller
     /**
      * Fetch users collection
      *
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): Response
     {
         $responseData = [
             'result' => $this->user->paginate()
@@ -32,9 +33,9 @@ class UserController extends Controller
     /**
      * Fetch user model
      * @param User $user
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user): Response
     {
         $responseData = [
             'result' => $user->loadMissing(['groups'])
@@ -46,9 +47,9 @@ class UserController extends Controller
      * Create a new user
      *
      * @param StoreRequest $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request): Response
     {
         $user = $this->user->create($request->all());
 
@@ -66,9 +67,9 @@ class UserController extends Controller
      *
      * @param User $user
      * @param UpdateRequest $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function update(User $user, UpdateRequest $request)
+    public function update(User $user, UpdateRequest $request): Response
     {
         $user->update($request->all());
 
@@ -85,9 +86,9 @@ class UserController extends Controller
      * Check user existence
      *
      * @param CheckRequest $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function check(CheckRequest $request)
+    public function check(CheckRequest $request): Response
     {
         $responseData =  [
             'result' => [

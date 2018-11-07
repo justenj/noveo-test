@@ -6,6 +6,7 @@ use App\Group;
 use App\Http\Requests\Groups\StoreRequest;
 use App\Http\Requests\Groups\UpdateRequest;
 use App\User;
+use Illuminate\Http\Response;
 
 class GroupController extends Controller
 {
@@ -19,9 +20,9 @@ class GroupController extends Controller
     /**
      * Fetch groups collection
      *
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): Response
     {
         $responseData = [
             'result' => $this->group->paginate()
@@ -33,9 +34,9 @@ class GroupController extends Controller
      * Create a new group
      *
      * @param StoreRequest $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request): Response
     {
         $group = $this->group->create($request->all());
 
@@ -51,9 +52,9 @@ class GroupController extends Controller
      *
      * @param Group $group
      * @param UpdateRequest $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function update(Group $group, UpdateRequest $request)
+    public function update(Group $group, UpdateRequest $request): Response
     {
         $group->update($request->all());
 
@@ -69,11 +70,13 @@ class GroupController extends Controller
      *
      * @param Group $group
      * @param User $user
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function addUser(Group $group, User $user)
+    public function addUser(Group $group, User $user): Response
     {
-        $group->users()->save($user);
+        if (! $group->hasUser($user->id)) {
+            $group->users()->save($user);
+        }
 
         return response([], 204);
     }
@@ -83,9 +86,9 @@ class GroupController extends Controller
      *
      * @param Group $group
      * @param User $user
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
-    public function removeUser(Group $group, User $user)
+    public function removeUser(Group $group, User $user): Response
     {
         $group->users()->delete($user);
 

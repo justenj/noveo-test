@@ -23,4 +23,20 @@ class GroupTest extends TestCase
         $groupUsers = $group->users()->get();
         $this->assertEquals($groupUsers->pluck('id'), $includedUsers->pluck('id'));
     }
+
+    /** @test */
+    public function hasUser()
+    {
+        $excludedUsers = factory(User::class, 3)->create();
+        $includedUsers = factory(User::class, 2)->create();
+        $group = factory(Group::class)->create();
+
+        $group->users()->saveMany($includedUsers);
+
+        $this->assertTrue($group->hasUser($includedUsers[0]->id));
+        $this->assertTrue($group->hasUser($includedUsers[1]->id));
+        $this->assertFalse($group->hasUser($excludedUsers[0]->id));
+        $this->assertFalse($group->hasUser($excludedUsers[1]->id));
+        $this->assertFalse($group->hasUser($excludedUsers[2]->id));
+    }
 }

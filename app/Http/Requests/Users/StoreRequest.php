@@ -37,7 +37,6 @@ class StoreRequest extends FormRequest
                 Rule::in(User::states())
             ],
             'groups' => [
-                'required',
                 'array',
                 'exists:groups,id',
             ]

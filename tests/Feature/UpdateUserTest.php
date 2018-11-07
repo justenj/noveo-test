@@ -165,8 +165,7 @@ class UpdateUserTest extends TestCase
         $this->assertValidationErrors($response, 'required', [
             'email',
             'last_name',
-            'first_name',
-            'groups'
+            'first_name'
         ]);
     }
 
